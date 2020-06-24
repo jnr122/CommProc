@@ -1,0 +1,3 @@
+/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/CommProtocol.dir

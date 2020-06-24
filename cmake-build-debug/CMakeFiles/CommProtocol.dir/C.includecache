@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/jonah/CLionProjects/CommProtocol/p1.c
+stdio.h
+-
+string.h
+-
+fcntl.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+unistd.h
+-
+
