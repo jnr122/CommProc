@@ -10,19 +10,19 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <sys/time.h> //FD_SET, FD_ISSET, FD_ZERO macros  
+#include <sys/time.h> //FD_SET, FD_ISSET, FD_ZERO macros
 
 #define TRUE   1
 #define FALSE  0
 #define PORT 8888
+#define BUFFER_SIZE 1024
 
 int main(int argc , char *argv[]) {
     int opt = TRUE;
-    int master_socket, addrlen, new_socket, client_socket[30], max_clients = 30, activity, i, valread, sd;
-    int max_sd;
+    int master_socket, addrlen, new_socket, client_socket[30],
+        max_clients = 30, activity, i, valread, sd, max_sd;
+    char buffer[1025];  //data buffer of 1K
     struct sockaddr_in address;
-
-    char buffer[1025];  //data buffer of 1K  
 
     //set of socket descriptors  
     fd_set readfds;
@@ -137,7 +137,7 @@ int main(int argc , char *argv[]) {
 
             if (FD_ISSET(sd , &readfds)) {
                 //Check if it was for closing, and  read the incoming message
-                if ((valread = read(sd, buffer, 1024)) == 0) {
+                if ((valread = read(sd, buffer, BUFFER_SIZE)) == 0) {
                     //Somebody disconnected , get their details and print
                     getpeername(sd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
                     printf("Host disconnected , ip %s , port %d \n" ,
@@ -153,12 +153,12 @@ int main(int argc , char *argv[]) {
 
                     //set the string terminating NULL byte on the end of the data read
                     buffer[valread] = '\0';
+                    printf("%s", buffer);
 
                     for (int j = 0; j < (sizeof(client_socket)/ sizeof(client_socket[0])); ++j) {
                         send(client_socket[j], buffer, strlen(buffer), 0);
                     }
 
-                    printf("%s", buffer);
 
                 }
             }
