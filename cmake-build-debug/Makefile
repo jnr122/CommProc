@@ -123,32 +123,32 @@ CommProtocol/fast:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/build
 .PHONY : CommProtocol/fast
 
-p3.o: p3.c.o
+2client.o: 2client.c.o
 
-.PHONY : p3.o
+.PHONY : 2client.o
 
 # target to build an object file
-p3.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.o
-.PHONY : p3.c.o
+2client.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.o
+.PHONY : 2client.c.o
 
-p3.i: p3.c.i
+2client.i: 2client.c.i
 
-.PHONY : p3.i
+.PHONY : 2client.i
 
 # target to preprocess a source file
-p3.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.i
-.PHONY : p3.c.i
+2client.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.i
+.PHONY : 2client.c.i
 
-p3.s: p3.c.s
+2client.s: 2client.c.s
 
-.PHONY : p3.s
+.PHONY : 2client.s
 
 # target to generate assembly for a file
-p3.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.s
-.PHONY : p3.c.s
+2client.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.s
+.PHONY : 2client.c.s
 
 serv.o: serv.c.o
 
@@ -177,6 +177,33 @@ serv.c.s:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.s
 .PHONY : serv.c.s
 
+sock.o: sock.c.o
+
+.PHONY : sock.o
+
+# target to build an object file
+sock.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.o
+.PHONY : sock.c.o
+
+sock.i: sock.c.i
+
+.PHONY : sock.i
+
+# target to preprocess a source file
+sock.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.i
+.PHONY : sock.c.i
+
+sock.s: sock.c.s
+
+.PHONY : sock.s
+
+# target to generate assembly for a file
+sock.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.s
+.PHONY : sock.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CommProtocol"
-	@echo "... p3.o"
-	@echo "... p3.i"
-	@echo "... p3.s"
+	@echo "... 2client.o"
+	@echo "... 2client.i"
+	@echo "... 2client.s"
 	@echo "... serv.o"
 	@echo "... serv.i"
 	@echo "... serv.s"
+	@echo "... sock.o"
+	@echo "... sock.i"
+	@echo "... sock.s"
 .PHONY : help
 
 

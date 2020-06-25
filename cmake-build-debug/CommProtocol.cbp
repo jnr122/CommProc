@@ -78,10 +78,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/p3.c">
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/2client.c">
 			<Option target="CommProtocol"/>
 		</Unit>
 		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/serv.c">
+			<Option target="CommProtocol"/>
+		</Unit>
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/sock.c">
 			<Option target="CommProtocol"/>
 		</Unit>
 		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/CMakeLists.txt">

@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/CommProtocol.dir/serv.c.o"
-  "CMakeFiles/CommProtocol.dir/p3.c.o"
+  "CMakeFiles/CommProtocol.dir/2client.c.o"
+  "CMakeFiles/CommProtocol.dir/sock.c.o"
   "CommProtocol.pdb"
   "CommProtocol"
 )

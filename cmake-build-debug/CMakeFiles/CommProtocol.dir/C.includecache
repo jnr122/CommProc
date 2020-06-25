@@ -6,17 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/Users/jonah/CLionProjects/CommProtocol/p1.c
+/Users/jonah/CLionProjects/CommProtocol/sock.c
 stdio.h
 -
 string.h
 -
 fcntl.h
 -
-sys/stat.h
--
-sys/types.h
--
 unistd.h
+-
+ctype.h
+-
+sys/ipc.h
+-
+sys/shm.h
+-
+sys/wait.h
 -
 
