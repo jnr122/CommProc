@@ -57,42 +57,42 @@ include CMakeFiles/CommProtocol.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CommProtocol.dir/flags.make
 
-CMakeFiles/CommProtocol.dir/main.c.o: CMakeFiles/CommProtocol.dir/flags.make
-CMakeFiles/CommProtocol.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CommProtocol.dir/main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CommProtocol.dir/main.c.o   -c /Users/jonah/CLionProjects/CommProtocol/main.c
+CMakeFiles/CommProtocol.dir/serv.c.o: CMakeFiles/CommProtocol.dir/flags.make
+CMakeFiles/CommProtocol.dir/serv.c.o: ../serv.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CommProtocol.dir/serv.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CommProtocol.dir/serv.c.o   -c /Users/jonah/CLionProjects/CommProtocol/serv.c
 
-CMakeFiles/CommProtocol.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CommProtocol.dir/main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jonah/CLionProjects/CommProtocol/main.c > CMakeFiles/CommProtocol.dir/main.c.i
+CMakeFiles/CommProtocol.dir/serv.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CommProtocol.dir/serv.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jonah/CLionProjects/CommProtocol/serv.c > CMakeFiles/CommProtocol.dir/serv.c.i
 
-CMakeFiles/CommProtocol.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CommProtocol.dir/main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jonah/CLionProjects/CommProtocol/main.c -o CMakeFiles/CommProtocol.dir/main.c.s
+CMakeFiles/CommProtocol.dir/serv.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CommProtocol.dir/serv.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jonah/CLionProjects/CommProtocol/serv.c -o CMakeFiles/CommProtocol.dir/serv.c.s
 
-CMakeFiles/CommProtocol.dir/main2.c.o: CMakeFiles/CommProtocol.dir/flags.make
-CMakeFiles/CommProtocol.dir/main2.c.o: ../main2.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CommProtocol.dir/main2.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CommProtocol.dir/main2.c.o   -c /Users/jonah/CLionProjects/CommProtocol/main2.c
+CMakeFiles/CommProtocol.dir/p3.c.o: CMakeFiles/CommProtocol.dir/flags.make
+CMakeFiles/CommProtocol.dir/p3.c.o: ../p3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CommProtocol.dir/p3.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/CommProtocol.dir/p3.c.o   -c /Users/jonah/CLionProjects/CommProtocol/p3.c
 
-CMakeFiles/CommProtocol.dir/main2.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CommProtocol.dir/main2.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jonah/CLionProjects/CommProtocol/main2.c > CMakeFiles/CommProtocol.dir/main2.c.i
+CMakeFiles/CommProtocol.dir/p3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/CommProtocol.dir/p3.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jonah/CLionProjects/CommProtocol/p3.c > CMakeFiles/CommProtocol.dir/p3.c.i
 
-CMakeFiles/CommProtocol.dir/main2.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CommProtocol.dir/main2.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jonah/CLionProjects/CommProtocol/main2.c -o CMakeFiles/CommProtocol.dir/main2.c.s
+CMakeFiles/CommProtocol.dir/p3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/CommProtocol.dir/p3.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jonah/CLionProjects/CommProtocol/p3.c -o CMakeFiles/CommProtocol.dir/p3.c.s
 
 # Object files for target CommProtocol
 CommProtocol_OBJECTS = \
-"CMakeFiles/CommProtocol.dir/main.c.o" \
-"CMakeFiles/CommProtocol.dir/main2.c.o"
+"CMakeFiles/CommProtocol.dir/serv.c.o" \
+"CMakeFiles/CommProtocol.dir/p3.c.o"
 
 # External object files for target CommProtocol
 CommProtocol_EXTERNAL_OBJECTS =
 
-CommProtocol: CMakeFiles/CommProtocol.dir/main.c.o
-CommProtocol: CMakeFiles/CommProtocol.dir/main2.c.o
+CommProtocol: CMakeFiles/CommProtocol.dir/serv.c.o
+CommProtocol: CMakeFiles/CommProtocol.dir/p3.c.o
 CommProtocol: CMakeFiles/CommProtocol.dir/build.make
 CommProtocol: CMakeFiles/CommProtocol.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable CommProtocol"

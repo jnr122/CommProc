@@ -123,59 +123,59 @@ CommProtocol/fast:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/build
 .PHONY : CommProtocol/fast
 
-main.o: main.c.o
+p3.o: p3.c.o
 
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main.c.s
-.PHONY : main.c.s
-
-main2.o: main2.c.o
-
-.PHONY : main2.o
+.PHONY : p3.o
 
 # target to build an object file
-main2.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main2.c.o
-.PHONY : main2.c.o
+p3.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.o
+.PHONY : p3.c.o
 
-main2.i: main2.c.i
+p3.i: p3.c.i
 
-.PHONY : main2.i
+.PHONY : p3.i
 
 # target to preprocess a source file
-main2.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main2.c.i
-.PHONY : main2.c.i
+p3.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.i
+.PHONY : p3.c.i
 
-main2.s: main2.c.s
+p3.s: p3.c.s
 
-.PHONY : main2.s
+.PHONY : p3.s
 
 # target to generate assembly for a file
-main2.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/main2.c.s
-.PHONY : main2.c.s
+p3.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/p3.c.s
+.PHONY : p3.c.s
+
+serv.o: serv.c.o
+
+.PHONY : serv.o
+
+# target to build an object file
+serv.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.o
+.PHONY : serv.c.o
+
+serv.i: serv.c.i
+
+.PHONY : serv.i
+
+# target to preprocess a source file
+serv.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.i
+.PHONY : serv.c.i
+
+serv.s: serv.c.s
+
+.PHONY : serv.s
+
+# target to generate assembly for a file
+serv.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.s
+.PHONY : serv.c.s
 
 # Help Target
 help:
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CommProtocol"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... main2.o"
-	@echo "... main2.i"
-	@echo "... main2.s"
+	@echo "... p3.o"
+	@echo "... p3.i"
+	@echo "... p3.s"
+	@echo "... serv.o"
+	@echo "... serv.i"
+	@echo "... serv.s"
 .PHONY : help
 
 
