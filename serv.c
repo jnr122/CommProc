@@ -16,8 +16,7 @@
 #define FALSE  0
 #define PORT 8888
 
-int main(int argc , char *argv[])
-{
+int main(int argc , char *argv[]) {
     int opt = TRUE;
     int master_socket, addrlen, new_socket, client_socket[30], max_clients = 30, activity, i, valread, sd;
     int max_sd;
@@ -42,8 +41,7 @@ int main(int argc , char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    //set master socket to allow multiple connections ,  
-    //this is just a good habit, it will work without this  
+    //set master socket to allow multiple connections
     if(setsockopt(master_socket, SOL_SOCKET, SO_REUSEADDR, (char *)&opt, sizeof(opt)) < 0 ) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
@@ -94,15 +92,14 @@ int main(int argc , char *argv[])
                 max_sd = sd;
         }
 
-        //wait for an activity on one of the sockets , timeout is NULL ,  
-        //so wait indefinitely  
+        //wait for an activity on one of the sockets, timeout is NULL
         activity = select(max_sd + 1, &readfds, NULL, NULL, NULL);
 
         if ((activity < 0) && (errno!=EINTR)) {
             printf("select error");
         }
 
-        //If something happened on the master socket ,  
+        //If something happened on the master socket
         //then its an incoming connection  
         if (FD_ISSET(master_socket, &readfds)) {
             if ((new_socket = accept(master_socket,
@@ -139,10 +136,9 @@ int main(int argc , char *argv[])
             sd = client_socket[i];
 
             if (FD_ISSET(sd , &readfds)) {
-                //Check if it was for closing , and also read the  
-                //incoming message  
+                //Check if it was for closing, and  read the incoming message
                 if ((valread = read(sd, buffer, 1024)) == 0) {
-                    //Somebody disconnected , get his details and print  
+                    //Somebody disconnected , get their details and print
                     getpeername(sd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
                     printf("Host disconnected , ip %s , port %d \n" ,
                            inet_ntoa(address.sin_addr) , ntohs(address.sin_port));
@@ -152,11 +148,10 @@ int main(int argc , char *argv[])
                     client_socket[i] = 0;
                 }
 
-                    //Echo back the message that came in
+                //Echo back the message that came in
                 else {
 
-                    //set the string terminating NULL byte on the end  
-                    //of the data read  
+                    //set the string terminating NULL byte on the end of the data read
                     buffer[valread] = '\0';
 
                     for (int j = 0; j < (sizeof(client_socket)/ sizeof(client_socket[0])); ++j) {
