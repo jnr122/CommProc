@@ -9,114 +9,129 @@
 #include <netdb.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "client.h"
 
 #define PORT "8888"
+#define TRUE 1
+#define BUFFER_SIZE 255
+#define FALSE 0
 
-struct sockaddr name;
+// initialize, set up and run
+int main(int agrc, char** argv) {
 
-void set_nonblock(int socket) {
+    Client c;
+
+    setup_client(&c);
+    run(&c);
+
+    return 0;
+}
+
+/**
+ * Make reads non blocking
+ * @param socket to adjust
+ * @return 0 on success
+ */
+int set_nonblock(int socket) {
     int flags;
     flags = fcntl(socket,F_GETFL,0);
     assert(flags != -1);
     fcntl(socket, F_SETFL, flags | O_NONBLOCK);
+    return 0;
 }
 
-// get sockaddr, IPv4 or IPv6:
-void *get_in_addr(struct sockaddr *sa) {
-    if (sa->sa_family == AF_INET)
-        return &(((struct sockaddr_in*)sa)->sin_addr);
+/**
+ * Connect to server
+ * @param c client
+ * @return 0 on success
+ */
+int setup_client(Client *c) {
+    memset(&c->hints, 0, sizeof c->hints); //make sure the struct is empty
+    c->hints.ai_family = AF_INET;
+    c->hints.ai_socktype = SOCK_STREAM; //tcp
+    c->hints.ai_flags = AI_PASSIVE;     //use local-host address
 
-    return &(((struct sockaddr_in6*)sa)->sin6_addr);
-}
-
-int main(int agrc, char** argv) {
-    int status, sock, adrlen;
-
-    struct addrinfo hints;
-    struct addrinfo *servinfo;  //will point to the results
-
-    fd_set read_flags,write_flags; // the flag sets to be used
-    struct timeval waitd;          // the max wait time for an event
-    int sel;                      // holds return value for select();
-
-    memset(&hints, 0, sizeof hints); //make sure the struct is empty
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM; //tcp
-    hints.ai_flags = AI_PASSIVE;     //use local-host address
-
-    //get server info, put into servinfo
-    if ((status = getaddrinfo("127.0.0.1", PORT, &hints, &servinfo)) != 0) {
-        fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
+    // get server info, put into servinfo
+    if ((c->status = getaddrinfo("127.0.0.1", PORT, &c->hints, &c->servinfo)) != 0) {
+        fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(c->status));
         exit(1);
     }
 
-    //make socket
-    sock = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
-    if (sock < 0) {
+    // make socket
+    c->sock = socket(c->servinfo->ai_family, c->servinfo->ai_socktype, c->servinfo->ai_protocol);
+    if (c->sock < 0) {
         printf("\nserver socket failure %m", errno);
         exit(1);
     }
 
-    if(connect(sock, servinfo->ai_addr, servinfo->ai_addrlen) < 0) {
+    if(connect(c->sock, c->servinfo->ai_addr, c->servinfo->ai_addrlen) < 0) {
         printf("\nclient connection failure %m", errno);
         exit(1);
     }
 
-    set_nonblock(sock);
+    set_nonblock(c->sock);
+    return 0;
+}
 
-    char out[255];
-    char in[255];
+/**
+ * Listen for input/ ouput
+ * @param c client
+ * @return 0 on success
+ */
+int run(Client *c) {
+    char out[BUFFER_SIZE];
+    char in[BUFFER_SIZE];
 
-    int numRead;
-    int numSent;
+    while(TRUE) {
 
-    while(1) {
-
-        waitd.tv_sec = 10;
-        FD_ZERO(&read_flags);
-        FD_ZERO(&write_flags);
-        FD_SET(sock, &read_flags);
-        FD_SET(STDIN_FILENO, &read_flags);
+        c->waitd.tv_sec = 10;
+        FD_ZERO(&c->read_flags);
+        FD_ZERO(&c->write_flags);
+        FD_SET(c->sock, &c->read_flags);
+        FD_SET(STDIN_FILENO, &c->read_flags);
 
         if(strlen(out) != 0)
-            FD_SET(sock, &write_flags);
+            FD_SET(c->sock, &c->write_flags);
 
-        sel = select(sock+1, &read_flags, &write_flags, (fd_set*)0, &waitd);
+        c->sel = select(c->sock+1, &c->read_flags, &c->write_flags, (fd_set*)0, &c->waitd);
 
-        if(sel < 0)
+        if(c->sel < 0)
             continue;
 
         //socket ready for reading
-        if(FD_ISSET(sock, &read_flags)) {
+        if(FD_ISSET(c->sock, &c->read_flags)) {
 
             //clear set
-            FD_CLR(sock, &read_flags);
+            FD_CLR(c->sock, &c->read_flags);
 
-            memset(&in, 0, 255);
+            // in
+            memset(&in, 0, BUFFER_SIZE);
 
-            numRead = recv(sock, in, 255, 0);
-            if(numRead <= 0) {
+            // in
+            c->valread = recv(c->sock, in, BUFFER_SIZE, 0);
+            if(c->valread <= 0) {
                 printf("\nClosing socket");
-                close(sock);
+                close(c->sock);
                 break;
             }
+
+            // in in
             else if(in[0] != '\0')
                 printf("%s",in);
 
-        }   //end if ready for read
+        } //end if ready for read
 
-        //if stdin is ready to be read
-        if(FD_ISSET(STDIN_FILENO, &read_flags))
-            fgets(out, 255, stdin);
+        // if stdin is ready to be read
+        if(FD_ISSET(STDIN_FILENO, &c->read_flags))
+            fgets(out, BUFFER_SIZE, stdin);
 
-
-        //socket ready for writing
-        if(FD_ISSET(sock, &write_flags)) {
+        // socket ready for writing
+        if(FD_ISSET(c->sock, &c->write_flags)) {
             //printf("\nSocket ready for write");
-            FD_CLR(sock, &write_flags);
-            send(sock, out, 255, 0);
-            memset(&out, 0, 255);
-        }   //end if
+            FD_CLR(c->sock, &c->write_flags);
+            send(c->sock, out, BUFFER_SIZE, 0);
+            memset(&out, 0, BUFFER_SIZE);
+        }
     }   //end while
 
     return 0;
