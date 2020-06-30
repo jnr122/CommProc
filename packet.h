@@ -24,7 +24,7 @@ union cmdPktFmt {
 };
 
 typedef struct Packet {
-    int head, done;
+    int head, done, corrupt;
     char frame[FRAME_SIZE];
 
 } Packet;
