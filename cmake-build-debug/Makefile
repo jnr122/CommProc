@@ -123,86 +123,32 @@ CommProtocol/fast:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/build
 .PHONY : CommProtocol/fast
 
-2client.o: 2client.c.o
+circ_buffer.o: circ_buffer.c.o
 
-.PHONY : 2client.o
-
-# target to build an object file
-2client.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.o
-.PHONY : 2client.c.o
-
-2client.i: 2client.c.i
-
-.PHONY : 2client.i
-
-# target to preprocess a source file
-2client.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.i
-.PHONY : 2client.c.i
-
-2client.s: 2client.c.s
-
-.PHONY : 2client.s
-
-# target to generate assembly for a file
-2client.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/2client.c.s
-.PHONY : 2client.c.s
-
-serv.o: serv.c.o
-
-.PHONY : serv.o
+.PHONY : circ_buffer.o
 
 # target to build an object file
-serv.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.o
-.PHONY : serv.c.o
+circ_buffer.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/circ_buffer.c.o
+.PHONY : circ_buffer.c.o
 
-serv.i: serv.c.i
+circ_buffer.i: circ_buffer.c.i
 
-.PHONY : serv.i
-
-# target to preprocess a source file
-serv.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.i
-.PHONY : serv.c.i
-
-serv.s: serv.c.s
-
-.PHONY : serv.s
-
-# target to generate assembly for a file
-serv.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.s
-.PHONY : serv.c.s
-
-sock.o: sock.c.o
-
-.PHONY : sock.o
-
-# target to build an object file
-sock.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.o
-.PHONY : sock.c.o
-
-sock.i: sock.c.i
-
-.PHONY : sock.i
+.PHONY : circ_buffer.i
 
 # target to preprocess a source file
-sock.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.i
-.PHONY : sock.c.i
+circ_buffer.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/circ_buffer.c.i
+.PHONY : circ_buffer.c.i
 
-sock.s: sock.c.s
+circ_buffer.s: circ_buffer.c.s
 
-.PHONY : sock.s
+.PHONY : circ_buffer.s
 
 # target to generate assembly for a file
-sock.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/sock.c.s
-.PHONY : sock.c.s
+circ_buffer.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/circ_buffer.c.s
+.PHONY : circ_buffer.c.s
 
 # Help Target
 help:
@@ -213,15 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CommProtocol"
-	@echo "... 2client.o"
-	@echo "... 2client.i"
-	@echo "... 2client.s"
-	@echo "... serv.o"
-	@echo "... serv.i"
-	@echo "... serv.s"
-	@echo "... sock.o"
-	@echo "... sock.i"
-	@echo "... sock.s"
+	@echo "... circ_buffer.o"
+	@echo "... circ_buffer.i"
+	@echo "... circ_buffer.s"
 .PHONY : help
 
 

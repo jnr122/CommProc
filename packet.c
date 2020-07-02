@@ -13,7 +13,7 @@ int main() {
     Packet p = {.head=0, .done=FALSE, .corrupt=FALSE};
     char input, nl;
 
-    print_packet(&p);
+    disp_packet(&p);
 
     while (TRUE) {
         // get input and snag new line
@@ -21,12 +21,25 @@ int main() {
         nl = getchar();
 
         process(&p, &input);
+        disp_packet(&p);
 
-        print_packet(&p);
+        // if complete and uncorrupted, display message
+        if (p.done && !p.corrupt) {
+            for (int i = 0; i < FRAME_SIZE; ++i)
+                printf("%c", p.frame[i]);
+            printf("\n");
+        }
 
     }
-
 }
+
+// read in to circ buffer, once packet size is reached check crc.
+//
+// if good make packet and throw out
+// else search for next start in buffer
+//      if there is a start try to make a new packet
+//          if enough, make new packet and check, restart
+//          else wait till new buffer input, try again
 
 int process(Packet *p, const char *c) {
 
@@ -34,9 +47,8 @@ int process(Packet *p, const char *c) {
     if (*c == START_FLAG) {
 
         // start flag not at the beginning, someone else is talking
-        if (p->head != 0) {
+        if (p->head != 0)
             printf("overwritten, starting packet over\n");
-        }
 
         // reset
         p->done = FALSE;
@@ -46,12 +58,12 @@ int process(Packet *p, const char *c) {
         ++p->head;
 
     // end flag found, check to make sure actually at frame end, else note corruption
+    // could say there is no corruption, just a smaller packet
     } else if (*c == END_FLAG) {
-        if (p->head == FRAME_SIZE-1) {
+        if (p->head == FRAME_SIZE-1)
             p->done = TRUE;
-        } else {
+        else
             p->corrupt = TRUE;
-        }
         // set end flag and then reset head
         p->frame[p->head] = *c;
         p->head = 0;
@@ -68,7 +80,7 @@ int process(Packet *p, const char *c) {
     return 0;
 }
 
-int print_packet(const Packet *p) {
+int disp_packet(const Packet *p) {
     printf("Head at %d, done: %d, corrupt: %d\n", p->head, p->done, p->corrupt);
     for (int i = 0; i < FRAME_SIZE; ++i) {
         printf("%d: ", i);

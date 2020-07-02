@@ -6,21 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/Users/jonah/CLionProjects/CommProtocol/sock.c
+/Users/jonah/CLionProjects/CommProtocol/circ_buffer.c
+circ_buffer.h
+/Users/jonah/CLionProjects/CommProtocol/circ_buffer.h
 stdio.h
 -
-string.h
--
-fcntl.h
--
-unistd.h
--
-ctype.h
--
-sys/ipc.h
--
-sys/shm.h
--
-sys/wait.h
+
+/Users/jonah/CLionProjects/CommProtocol/circ_buffer.h
+stdint.h
 -
 

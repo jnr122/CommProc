@@ -10,19 +10,6 @@
 #define TRUE 1
 #define FALSE 0
 
-union cmdPktFmt {
-    uint8_t byte[14];
-    struct {
-        uint16_t SOP;
-        uint16_t CRC;
-        uint16_t ID;
-        uint16_t LeftDrive;
-        uint16_t LeftAux;
-        uint16_t RightDrive;
-        uint16_t RightAux;
-    } cmds;
-};
-
 typedef struct Packet {
     int head, done, corrupt;
     char frame[FRAME_SIZE];
@@ -30,6 +17,6 @@ typedef struct Packet {
 } Packet;
 
 int process(Packet *p, const char *c);
-int print_packet(const Packet *p);
+int disp_packet(const Packet *p);
 
 #endif //COMMPROTOCOL_PACKET_H
