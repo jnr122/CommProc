@@ -4,8 +4,11 @@
 
 #include "circ_buffer.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 #define START_FLAG 'S'
+#define CRC1 'C'
+#define CRC2 'R'
 
 int main() {
     Circ_Buffer cb = {.head=0, .tail=0};
@@ -37,23 +40,63 @@ void insert(Circ_Buffer *cb, const char *c) {
     // if head-tail = distance then packet size reached
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE-1) {
 
-        // slide head and tail until tail hits a start flag - maybe just tail? slide until when?
-        while (cb->frame[cb->tail] != START_FLAG && cb->tail != cb->head) {
-//            circulate(&cb->head);
-            circulate(&cb->tail);
-        }
+//        // slide tail until tail hits a start flag or catches head
+//        while (cb->frame[cb->tail] != START_FLAG && cb->tail != cb->head) {
+////            circulate(&cb->head);
+//            circulate(&cb->tail);
+//        }
 
-        // make packet and check CRC
-        for (int i = cb->tail; i != cb->head-1; circulate(&i)) {
-            // if success, do something and throw packet out, move tail up to head
+        if (next_start(cb))
+            make_packet(cb);
 
 
-            // if failure, slide until when?
-        }
     } else
         circulate(&cb->head);
+}
+
+int next_start(Circ_Buffer *cb) {
+
+    // while there is still another tail, send it back for packet making
+
+    for (int i = cb->tail; i != cb->head; circulate(&i)) {
+
+        if (cb->frame[i] == START_FLAG) {
+            cb->tail = i;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void make_packet(Circ_Buffer *cb) {
+    int j = 0;
+
+    for (int i = cb->tail; i != cb->head; circulate(&i)) {
+        cb->p.frame[j] = cb->frame[i];
+        ++j;
+    }
+
+    checkCRC(&cb->p);
+    disp_packet(&cb->p);
+
+    if (get_distance(cb->head, cb->tail) == FRAME_SIZE -1) {
+        ++cb->tail;
+        if (!next_start(cb)) {
+            cb->tail = cb->head;
+        }
+    }
 
 
+
+    // no start within window size
+
+    // start within window size
+
+}
+
+void checkCRC(Packet *p) {
+    p->corrupt = (p->frame[1] != CRC1 || p->frame[2] != CRC2);
 }
 
 // dist [,)
@@ -80,6 +123,15 @@ void disp_buff(const Circ_Buffer *cb) {
         else
             printf("%c\n", cb->frame[i]);
 
+    }
+    printf("\n");
+}
+
+int disp_packet(const Packet *p) {
+    printf("Head at %d, done: %d, corrupt: %d\n", p->head, p->done, p->corrupt);
+    for (int i = 0; i < FRAME_SIZE; ++i) {
+        printf("%d: ", i);
+        printf("%c\n", p->frame[i]);
     }
     printf("\n");
 }
