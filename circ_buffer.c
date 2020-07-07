@@ -141,7 +141,7 @@ void disp_buff(const Circ_Buffer *cb) {
  * Display packet
  * @param p the packet
  */
-int disp_packet(const Packet *p) {
+void disp_packet(const Packet *p) {
     printf("Head at %d, done: %d, corrupt: %d\n", p->head, p->done, p->corrupt);
     for (int i = 0; i < FRAME_SIZE; ++i) {
         printf("%d: ", i);

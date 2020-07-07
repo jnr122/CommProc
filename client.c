@@ -13,13 +13,17 @@
 
 #define PORT "8888"
 #define TRUE 1
-#define BUFFER_SIZE 255
+#define INPUT_SIZE 255
 #define FALSE 0
 
 // initialize, set up and run
 int main(int agrc, char** argv) {
-
-    Client c;
+    Client c = {
+            .cb = {
+                    .head=0,
+                    .tail=0
+            }
+    };
 
     setup_client(&c);
     run(&c);
@@ -79,8 +83,8 @@ int setup_client(Client *c) {
  * @return 0 on success
  */
 int run(Client *c) {
-    char out[BUFFER_SIZE];
-    char in[BUFFER_SIZE];
+    char out[INPUT_SIZE];
+    char in[INPUT_SIZE];
 
     while(TRUE) {
 
@@ -105,32 +109,36 @@ int run(Client *c) {
             FD_CLR(c->sock, &c->read_flags);
 
             // in
-            memset(&in, 0, BUFFER_SIZE);
+            memset(&in, 0, INPUT_SIZE);
 
             // in
-            c->valread = recv(c->sock, in, BUFFER_SIZE, 0);
+            c->valread = recv(c->sock, in, INPUT_SIZE, 0);
             if(c->valread <= 0) {
                 printf("\nClosing socket");
                 close(c->sock);
                 break;
             }
 
-                // in in
-            else if(in[0] != '\0')
-                printf("%s",in);
+            // in in
+            else if(in[0] != '\0') {
+//                printf("%s",in);
+                insert(&c->cb, &in[0]);
+                disp_buff(&c->cb);
+            }
+
 
         } //end if ready for read
 
         // if stdin is ready to be read
         if(FD_ISSET(STDIN_FILENO, &c->read_flags))
-            fgets(out, BUFFER_SIZE, stdin);
+            fgets(out, INPUT_SIZE, stdin);
 
         // socket ready for writing
         if(FD_ISSET(c->sock, &c->write_flags)) {
             //printf("\nSocket ready for write");
             FD_CLR(c->sock, &c->write_flags);
-            send(c->sock, out, BUFFER_SIZE, 0);
-            memset(&out, 0, BUFFER_SIZE);
+            send(c->sock, out, INPUT_SIZE, 0);
+            memset(&out, 0, INPUT_SIZE);
         }
     }   //end while
 

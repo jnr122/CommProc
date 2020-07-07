@@ -6,7 +6,7 @@
 #define COMMPROTOCOL_CIRC_BUFFER_H
 
 #include <stdint.h>
-#define BUFFER_SIZE 255
+#define BUFFER_SIZE 10
 #define FRAME_SIZE 6
 #define TRUE 1
 #define FALSE 0
@@ -31,7 +31,7 @@ int get_distance(int head, int tail);
 int next_start(Circ_Buffer *cb);
 
 void make_packet(Circ_Buffer *cb);
-int disp_packet(const Packet *p);
+void disp_packet(const Packet *p);
 void checkCRC(Packet *p);
 
 

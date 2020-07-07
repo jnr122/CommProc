@@ -4,4 +4,4 @@ project(CommProtocol C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(CommProtocol serv.c client.c circ_buffer.c)
-#add_executable(CommProtocol circ_buffer.c)
+#add_executable(CommProtocol client.c)
