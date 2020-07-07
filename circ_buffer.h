@@ -12,7 +12,7 @@
 #define FALSE 0
 
 typedef struct Packet {
-    int head, done, corrupt;
+    int corrupt;
     char frame[FRAME_SIZE];
 
 } Packet;

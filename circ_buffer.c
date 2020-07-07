@@ -65,18 +65,18 @@ int next_start(Circ_Buffer *cb) {
  * @param cb the buffer
  */
 void make_packet(Circ_Buffer *cb) {
-    // reset to uncorrupted, probably unnecessary
-    int j = 0;
-    for (int i = cb->tail; i != cb->head; circulate(&i)) {
-        cb->p.frame[j] = cb->frame[i];
-        ++j;
+    if (cb->frame[cb->tail] == START_FLAG) {
+        int j = 0;
+        for (int i = cb->tail; i != cb->head; circulate(&i)) {
+            cb->p.frame[j] = cb->frame[i];
+            ++j;
+        }
+
+        checkCRC(&cb->p);
+        // decide to do with packet based on corrupt value of CRC check here
+
+        disp_packet(&cb->p);
     }
-
-    checkCRC(&cb->p);
-    // decide to do with packet based on corrupt value of CRC check here
-
-    disp_packet(&cb->p);
-
     // move the tail to the head after finishing packet
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE) {
         ++cb->tail;
@@ -142,7 +142,7 @@ void disp_buff(const Circ_Buffer *cb) {
  * @param p the packet
  */
 void disp_packet(const Packet *p) {
-    printf("Head at %d, done: %d, corrupt: %d\n", p->head, p->done, p->corrupt);
+    printf("corrupt: %d\n", p->corrupt);
     for (int i = 0; i < FRAME_SIZE; ++i) {
         printf("%d: ", i);
         printf("%c\n", p->frame[i]);
