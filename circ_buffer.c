@@ -36,27 +36,16 @@ int main() {
 //          else wait till new buffer input, try again
 void insert(Circ_Buffer *cb, const char *c) {
     cb->frame[cb->head] = *c;
+    circulate(&cb->head);
 
     // if head-tail = distance then packet size reached
-    if (get_distance(cb->head, cb->tail) == FRAME_SIZE-1) {
-
-//        // slide tail until tail hits a start flag or catches head
-//        while (cb->frame[cb->tail] != START_FLAG && cb->tail != cb->head) {
-////            circulate(&cb->head);
-//            circulate(&cb->tail);
-//        }
-
-        if (next_start(cb))
-            make_packet(cb);
-
-
-    } else
-        circulate(&cb->head);
+    if (get_distance(cb->head, cb->tail) == FRAME_SIZE)
+        make_packet(cb);
+//    else
+//        circulate(&cb->head);
 }
 
 int next_start(Circ_Buffer *cb) {
-
-    // while there is still another tail, send it back for packet making
 
     for (int i = cb->tail; i != cb->head; circulate(&i)) {
 
@@ -70,6 +59,8 @@ int next_start(Circ_Buffer *cb) {
 }
 
 void make_packet(Circ_Buffer *cb) {
+    // reset to uncorrupted, probably unnecessary
+
     int j = 0;
 
     for (int i = cb->tail; i != cb->head; circulate(&i)) {
@@ -78,20 +69,17 @@ void make_packet(Circ_Buffer *cb) {
     }
 
     checkCRC(&cb->p);
+    // decide to do with packet based on corrupt value of CRC check
+
+
     disp_packet(&cb->p);
 
-    if (get_distance(cb->head, cb->tail) == FRAME_SIZE -1) {
+    if (get_distance(cb->head, cb->tail) == FRAME_SIZE) {
         ++cb->tail;
         if (!next_start(cb)) {
             cb->tail = cb->head;
         }
     }
-
-
-
-    // no start within window size
-
-    // start within window size
 
 }
 
@@ -107,7 +95,10 @@ int get_distance(int head, int tail) {
         return head+(BUFFER_SIZE-tail);
 }
 
-void circulate(int *loc) { *loc = (*loc+1) % BUFFER_SIZE; }
+// loop around the circular buffer
+void circulate(int *loc) {
+    *loc = (*loc+1) % BUFFER_SIZE;
+}
 
 void disp_buff(const Circ_Buffer *cb) {
     printf("Head at %d\n", cb->head);
