@@ -84,6 +84,18 @@
 		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/circ_buffer.h">
 			<Option target="CommProtocol"/>
 		</Unit>
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/client.c">
+			<Option target="CommProtocol"/>
+		</Unit>
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/client.h">
+			<Option target="CommProtocol"/>
+		</Unit>
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/serv.c">
+			<Option target="CommProtocol"/>
+		</Unit>
+		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/serv.h">
+			<Option target="CommProtocol"/>
+		</Unit>
 		<Unit filename="/Users/jonah/CLionProjects/CommProtocol/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

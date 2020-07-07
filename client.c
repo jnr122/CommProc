@@ -20,6 +20,7 @@
 int main(int agrc, char** argv) {
 
     Client c;
+
     setup_client(&c);
     run(&c);
 
@@ -97,7 +98,7 @@ int run(Client *c) {
         if(c->sel < 0)
             continue;
 
-        //socket ready for reading from server
+        //socket ready for reading
         if(FD_ISSET(c->sock, &c->read_flags)) {
 
             //clear set
@@ -114,7 +115,7 @@ int run(Client *c) {
                 break;
             }
 
-            // in in
+                // in in
             else if(in[0] != '\0')
                 printf("%s",in);
 
@@ -122,8 +123,9 @@ int run(Client *c) {
 
         // if stdin is ready to be read
         if(FD_ISSET(STDIN_FILENO, &c->read_flags))
+            fgets(out, BUFFER_SIZE, stdin);
 
-        // socket ready for writing to server
+        // socket ready for writing
         if(FD_ISSET(c->sock, &c->write_flags)) {
             //printf("\nSocket ready for write");
             FD_CLR(c->sock, &c->write_flags);

@@ -6,7 +6,7 @@
 #define COMMPROTOCOL_CIRC_BUFFER_H
 
 #include <stdint.h>
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 255
 #define FRAME_SIZE 6
 #define TRUE 1
 #define FALSE 0

@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/jonah/CLionProjects/CommProtocol/circ_buffer.c" "/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/CommProtocol.dir/circ_buffer.c.o"
+  "/Users/jonah/CLionProjects/CommProtocol/client.c" "/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/CommProtocol.dir/client.c.o"
+  "/Users/jonah/CLionProjects/CommProtocol/serv.c" "/Users/jonah/CLionProjects/CommProtocol/cmake-build-debug/CMakeFiles/CommProtocol.dir/serv.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

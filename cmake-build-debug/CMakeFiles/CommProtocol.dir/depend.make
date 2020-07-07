@@ -4,3 +4,10 @@
 CMakeFiles/CommProtocol.dir/circ_buffer.c.o: ../circ_buffer.c
 CMakeFiles/CommProtocol.dir/circ_buffer.c.o: ../circ_buffer.h
 
+CMakeFiles/CommProtocol.dir/client.c.o: ../circ_buffer.h
+CMakeFiles/CommProtocol.dir/client.c.o: ../client.c
+CMakeFiles/CommProtocol.dir/client.c.o: ../client.h
+
+CMakeFiles/CommProtocol.dir/serv.c.o: ../serv.c
+CMakeFiles/CommProtocol.dir/serv.c.o: ../serv.h
+
