@@ -107,11 +107,8 @@ int run(Client *c) {
 
             //clear set
             FD_CLR(c->sock, &c->read_flags);
-
-            // in
             memset(&in, 0, INPUT_SIZE);
 
-            // in
             c->valread = recv(c->sock, in, INPUT_SIZE, 0);
             if(c->valread <= 0) {
                 printf("\nClosing socket");
@@ -119,9 +116,7 @@ int run(Client *c) {
                 break;
             }
 
-            // in in
             else if(in[0] != '\0') {
-//                printf("%s",in);
                 insert(&c->cb, &in[0]);
                 disp_buff(&c->cb);
             }

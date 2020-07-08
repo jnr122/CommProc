@@ -11,26 +11,6 @@
 #define CRC2 'R'
 
 /**
- * Tester
- */
-//int main() {
-//    Circ_Buffer cb = {.head=0, .tail=0};
-//    char input, nl;
-//
-//    disp_buff(&cb);
-//
-//    while (TRUE) {
-//        // get input and snag new line
-//        input = getchar();
-//        nl = getchar();
-//
-//        insert(&cb, &input);
-//        disp_buff(&cb);
-//
-//    }
-//}
-
-/**
  * Add new input to buffer
  * @param cb the buffer
  * @param c the new character
@@ -38,8 +18,6 @@
 void insert(Circ_Buffer *cb, const char *c) {
     cb->frame[cb->head] = *c;
     circulate(&cb->head);
-
-    // if head-tail = distance then packet size reached
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE)
         make_packet(cb);
 }
@@ -56,7 +34,6 @@ int next_start(Circ_Buffer *cb) {
             return TRUE;
         }
     }
-
     return FALSE;
 }
 
@@ -142,10 +119,10 @@ void disp_buff(const Circ_Buffer *cb) {
  * @param p the packet
  */
 void disp_packet(const Packet *p) {
+    printf("\n----------------\n");
     printf("corrupt: %d\n", p->corrupt);
-    for (int i = 0; i < FRAME_SIZE; ++i) {
-        printf("%d: ", i);
-        printf("%c\n", p->frame[i]);
-    }
+    for (int i = 0; i < FRAME_SIZE; ++i)
+        printf("%c", p->frame[i]);
+    printf("\n----------------\n");
     printf("\n");
 }
