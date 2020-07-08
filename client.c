@@ -21,8 +21,9 @@ int main(int agrc, char** argv) {
     Client c = {
             .cb = {
                     .head=0,
-                    .tail=0
-            }
+                    .tail=0,
+            },
+
     };
 
     setup_client(&c);

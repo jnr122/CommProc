@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #define START_FLAG 'S'
+
 #define CRC1 'C'
 #define CRC2 'R'
 
@@ -42,6 +43,9 @@ int next_start(Circ_Buffer *cb) {
  * @param cb the buffer
  */
 void make_packet(Circ_Buffer *cb) {
+    uint16_t CRC=0xFFFF;
+
+
     if (cb->frame[cb->tail] == START_FLAG) {
         int j = 0;
         for (int i = cb->tail; i != cb->head; circulate(&i)) {
@@ -49,8 +53,9 @@ void make_packet(Circ_Buffer *cb) {
             ++j;
         }
 
-        checkCRC(&cb->p);
-        // decide to do with packet based on corrupt value of CRC check here
+        // decide to do with packet based on value of CRC check here
+        calcPacketCRC(&CRC, (uint8_t *) &cb->p.frame[2], sizeof(cb->p.frame)-2);
+        printf("%u", CRC);
 
         disp_packet(&cb->p);
     }
@@ -65,11 +70,19 @@ void make_packet(Circ_Buffer *cb) {
 }
 
 /**
- * Validate CRC of packet, standin for now
- * @param p the packet
+ * Do CRC check
+ * @param CRC the seed
+ * @param object the frame index following CRC
+ * @param size the size of the remaining array
  */
-void checkCRC(Packet *p) {
-    p->corrupt = (p->frame[1] != CRC1 || p->frame[2] != CRC2);
+void calcPacketCRC(uint16_t *CRC, uint8_t *object, uint16_t size) {
+    for (int i = 0; i < size; ++i)
+        calcCRC(CRC, *(++object));
+}
+void calcCRC(uint16_t *CRC, uint8_t DataByte) {
+    *CRC = ((*CRC<<8)+(*CRC>>8)) ^ DataByte;
+    *CRC ^= (*CRC & 0x00FF)>>4;
+    *CRC ^= ((*CRC & 0x00FF)<<12)^((*CRC & 0x00FF)<<5);
 }
 
 /**
