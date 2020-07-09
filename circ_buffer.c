@@ -45,7 +45,6 @@ int next_start(Circ_Buffer *cb) {
 void make_packet(Circ_Buffer *cb) {
     uint16_t CRC=0xFFFF;
 
-
     if (cb->frame[cb->tail] == START_FLAG) {
         int j = 0;
         for (int i = cb->tail; i != cb->head; circulate(&i)) {
@@ -54,7 +53,7 @@ void make_packet(Circ_Buffer *cb) {
         }
 
         // decide to do with packet based on value of CRC check here
-        calcPacketCRC(&CRC, (uint8_t *) &cb->p.frame[2], sizeof(cb->p.frame)-2);
+        calcPacketCRC(&CRC, (uint8_t *)&cb->p.frame[2], sizeof(cb->p.frame)-2);
         printf("%u", CRC);
 
         disp_packet(&cb->p);

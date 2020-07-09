@@ -4,6 +4,3 @@
 CMakeFiles/CommProtocol.dir/buff_tester.c.o: ../buff_tester.c
 CMakeFiles/CommProtocol.dir/buff_tester.c.o: ../circ_buffer.h
 
-CMakeFiles/CommProtocol.dir/circ_buffer.c.o: ../circ_buffer.c
-CMakeFiles/CommProtocol.dir/circ_buffer.c.o: ../circ_buffer.h
-
