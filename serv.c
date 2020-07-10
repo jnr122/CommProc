@@ -8,11 +8,11 @@
 #include <unistd.h>      //close
 #include <arpa/inet.h>   //close
 #include <sys/types.h>
+#include <stdlib.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/time.h>    //FD_SET, FD_ISSET, FD_ZERO macros
 #include "serv.h"
-
 #define TRUE   1
 #define FALSE  0
 #define PORT 8888
@@ -39,7 +39,7 @@ int main(int argc , char *argv[]) {
  */
 int run(Server *s) {
 
-    int xxxx = 1;
+    char temp[30];
     //clear the socket set
     FD_ZERO(&s->readfds);
 
@@ -82,10 +82,8 @@ int run(Server *s) {
                 s->client_socket[i] = s->new_socket;
                 printf("Adding to list of sockets as %d\n", i);
                 s->message = "i";
-
-//                sprintf(s->message, "%d", i);
-
-//                *s->message = 5;
+                snprintf(temp, sizeof(temp), "%d",i);
+                s->message = temp;
                 break;
             }
         }

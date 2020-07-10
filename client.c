@@ -120,7 +120,7 @@ int run(Client *c) {
 
             else if(in[0] != '\0') {
                 sscanf(in, "%d", &temp);
-                printf("%s", in);
+                printf("%s\n", in);
                 uint16_t u = (uint16_t)temp;
 
                 insert(&c->cb, &u);
