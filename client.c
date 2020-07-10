@@ -86,6 +86,7 @@ int setup_client(Client *c) {
 int run(Client *c) {
     char out[INPUT_SIZE];
     char in[INPUT_SIZE];
+    int temp;
 
     while(TRUE) {
 
@@ -118,7 +119,11 @@ int run(Client *c) {
             }
 
             else if(in[0] != '\0') {
-                insert(&c->cb, &in[0]);
+                sscanf(in, "%d", &temp);
+                printf("%s", in);
+                uint16_t u = (uint16_t)temp;
+
+                insert(&c->cb, &u);
                 disp_buff(&c->cb);
             }
 

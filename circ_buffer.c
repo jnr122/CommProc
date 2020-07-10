@@ -11,7 +11,7 @@
  * @param cb the buffer
  * @param c the new character
  */
-void insert(Circ_Buffer *cb, const char *c) {
+void insert(Circ_Buffer *cb, const uint16_t *c) {
     cb->frame[cb->head] = *c;
     circulate(&cb->head);
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE)
@@ -25,7 +25,7 @@ void insert(Circ_Buffer *cb, const char *c) {
  */
 int next_start(Circ_Buffer *cb) {
     for (int i = cb->tail; i != cb->head; circulate(&i)) {
-        if (cb->frame[i] == START_FLAG) {
+        if (cb->frame[i] == SOP) {
             cb->tail = i;
             return TRUE;
         }
@@ -40,7 +40,7 @@ int next_start(Circ_Buffer *cb) {
 void make_packet(Circ_Buffer *cb) {
     uint16_t CRC=0xFFFF;
 
-    if (cb->frame[cb->tail] == START_FLAG) {
+    if (cb->frame[cb->tail] == SOP) {
         int j = 0;
         for (int i = cb->tail; i != cb->head; circulate(&i)) {
             cb->p.frame[j] = cb->frame[i];
@@ -49,7 +49,7 @@ void make_packet(Circ_Buffer *cb) {
 
         // decide to do with packet based on value of CRC check here
         calcPacketCRC(&CRC, (uint8_t *)&cb->p.frame[NUM_HEADER_VALS], (sizeof(cb->p.frame)-NUM_HEADER_VALS));
-        printf("%u", CRC);
+        printf("\n%u", CRC);
 
         disp_packet(&cb->p);
     }
@@ -70,8 +70,10 @@ void make_packet(Circ_Buffer *cb) {
  * @param size the size of the remaining array
  */
 void calcPacketCRC(uint16_t *CRC, uint8_t *object, uint16_t size) {
-    for (int i = 0; i < size; ++i)
+    for (int i = 0; i < size; ++i) {
         calcCRC(CRC, *(++object));
+        printf("%u ", *object);
+    }
 }
 void calcCRC(uint16_t *CRC, uint8_t DataByte) {
     *CRC = ((*CRC<<8)+(*CRC>>8)) ^ DataByte;
@@ -109,13 +111,13 @@ void disp_buff(const Circ_Buffer *cb) {
         printf("%d: ", i);
 
         if (i == cb->head && i == cb->tail)
-            printf("%c  <-H,T\n", cb->frame[i]);
+            printf("%u  <-H,T\n", cb->frame[i]);
         else if (i == cb->head)
-            printf("%c  <-H\n", cb->frame[i]);
+            printf("%u  <-H\n", cb->frame[i]);
         else if (i == cb->tail)
-            printf("%c  <-T\n", cb->frame[i]);
+            printf("%u  <-T\n", cb->frame[i]);
         else
-            printf("%c\n", cb->frame[i]);
+            printf("%u\n", cb->frame[i]);
 
     }
     printf("\n");
@@ -130,9 +132,9 @@ void disp_packet(const Packet *p) {
     printf(" corrupt: %d\n ", p->corrupt);
     for (int i = 0; i < FRAME_SIZE; ++i) {
         if (i == NUM_HEADER_VALS)
-            printf(" | %c", p->frame[i]);
+            printf(" | %u", p->frame[i]);
         else
-            printf("%c", p->frame[i]);
+            printf("%u", p->frame[i]);
 
     }
     printf("\n ----------------\n");

@@ -38,6 +38,8 @@ int main(int argc , char *argv[]) {
  * @return 0 on success
  */
 int run(Server *s) {
+
+    int xxxx = 1;
     //clear the socket set
     FD_ZERO(&s->readfds);
 
@@ -73,6 +75,21 @@ int run(Server *s) {
             exit(EXIT_FAILURE);
         }
 
+        //add new socket to array of sockets
+        for (int i = 0; i < s->max_clients; i++) {
+            //if position is empty
+            if (s->client_socket[i] == 0) {
+                s->client_socket[i] = s->new_socket;
+                printf("Adding to list of sockets as %d\n", i);
+                s->message = "i";
+
+//                sprintf(s->message, "%d", i);
+
+//                *s->message = 5;
+                break;
+            }
+        }
+
         // inform user of socket number - used in send and receive commands
         printf("New connection: socket fd is %d, ip is %s, port is %d"
                "", s->new_socket, inet_ntoa(s->address.sin_addr), ntohs
@@ -82,17 +99,8 @@ int run(Server *s) {
         if (send(s->new_socket, s->message, strlen(s->message), 0) != strlen(s->message))
             perror("send");
 
-        printf("\nWelcome message sent successfully. ");
+        printf("\nWelcome message sent successfully.\n");
 
-        //add new socket to array of sockets
-        for (int i = 0; i < s->max_clients; i++) {
-            //if position is empty
-            if (s->client_socket[i] == 0) {
-                s->client_socket[i] = s->new_socket;
-                printf("Adding to list of sockets as %d\n", i);
-                break;
-            }
-        }
     }
 
     //else its some IO operation on some other socket
