@@ -9,6 +9,8 @@
 /Users/jonah/CLionProjects/CommProtocol/buff_tester.c
 stdio.h
 -
+stdlib.h
+-
 circ_buffer.h
 /Users/jonah/CLionProjects/CommProtocol/circ_buffer.h
 

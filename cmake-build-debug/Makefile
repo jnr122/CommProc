@@ -123,6 +123,33 @@ CommProtocol/fast:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/build
 .PHONY : CommProtocol/fast
 
+buff_tester.o: buff_tester.c.o
+
+.PHONY : buff_tester.o
+
+# target to build an object file
+buff_tester.c.o:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/buff_tester.c.o
+.PHONY : buff_tester.c.o
+
+buff_tester.i: buff_tester.c.i
+
+.PHONY : buff_tester.i
+
+# target to preprocess a source file
+buff_tester.c.i:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/buff_tester.c.i
+.PHONY : buff_tester.c.i
+
+buff_tester.s: buff_tester.c.s
+
+.PHONY : buff_tester.s
+
+# target to generate assembly for a file
+buff_tester.c.s:
+	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/buff_tester.c.s
+.PHONY : buff_tester.c.s
+
 circ_buffer.o: circ_buffer.c.o
 
 .PHONY : circ_buffer.o
@@ -150,60 +177,6 @@ circ_buffer.c.s:
 	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/circ_buffer.c.s
 .PHONY : circ_buffer.c.s
 
-client.o: client.c.o
-
-.PHONY : client.o
-
-# target to build an object file
-client.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/client.c.o
-.PHONY : client.c.o
-
-client.i: client.c.i
-
-.PHONY : client.i
-
-# target to preprocess a source file
-client.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/client.c.i
-.PHONY : client.c.i
-
-client.s: client.c.s
-
-.PHONY : client.s
-
-# target to generate assembly for a file
-client.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/client.c.s
-.PHONY : client.c.s
-
-serv.o: serv.c.o
-
-.PHONY : serv.o
-
-# target to build an object file
-serv.c.o:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.o
-.PHONY : serv.c.o
-
-serv.i: serv.c.i
-
-.PHONY : serv.i
-
-# target to preprocess a source file
-serv.c.i:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.i
-.PHONY : serv.c.i
-
-serv.s: serv.c.s
-
-.PHONY : serv.s
-
-# target to generate assembly for a file
-serv.c.s:
-	$(MAKE) -f CMakeFiles/CommProtocol.dir/build.make CMakeFiles/CommProtocol.dir/serv.c.s
-.PHONY : serv.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... CommProtocol"
+	@echo "... buff_tester.o"
+	@echo "... buff_tester.i"
+	@echo "... buff_tester.s"
 	@echo "... circ_buffer.o"
 	@echo "... circ_buffer.i"
 	@echo "... circ_buffer.s"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
-	@echo "... serv.o"
-	@echo "... serv.i"
-	@echo "... serv.s"
 .PHONY : help
 
 

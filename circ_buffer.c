@@ -6,11 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define START_FLAG 'S'
-
-#define CRC1 'C'
-#define CRC2 'R'
-
 /**
  * Add new input to buffer
  * @param cb the buffer
@@ -53,7 +48,7 @@ void make_packet(Circ_Buffer *cb) {
         }
 
         // decide to do with packet based on value of CRC check here
-        calcPacketCRC(&CRC, (uint8_t *)&cb->p.frame[2], sizeof(cb->p.frame)-2);
+        calcPacketCRC(&CRC, (uint8_t *)&cb->p.frame[NUM_HEADER_VALS], (sizeof(cb->p.frame)-NUM_HEADER_VALS));
         printf("%u", CRC);
 
         disp_packet(&cb->p);
@@ -131,10 +126,15 @@ void disp_buff(const Circ_Buffer *cb) {
  * @param p the packet
  */
 void disp_packet(const Packet *p) {
-    printf("\n----------------\n");
-    printf("corrupt: %d\n", p->corrupt);
-    for (int i = 0; i < FRAME_SIZE; ++i)
-        printf("%c", p->frame[i]);
-    printf("\n----------------\n");
+    printf("\n ----------------\n");
+    printf(" corrupt: %d\n ", p->corrupt);
+    for (int i = 0; i < FRAME_SIZE; ++i) {
+        if (i == NUM_HEADER_VALS)
+            printf(" | %c", p->frame[i]);
+        else
+            printf("%c", p->frame[i]);
+
+    }
+    printf("\n ----------------\n");
     printf("\n");
 }

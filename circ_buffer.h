@@ -9,8 +9,11 @@
 
 #define BUFFER_SIZE 10
 #define FRAME_SIZE 6
+#define NUM_HEADER_VALS 2
 #define TRUE 1
 #define FALSE 0
+#define START_FLAG 'S'
+
 
 // packet
 typedef struct Packet {

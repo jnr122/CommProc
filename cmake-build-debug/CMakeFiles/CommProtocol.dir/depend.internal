@@ -4,3 +4,6 @@
 CMakeFiles/CommProtocol.dir/buff_tester.c.o
  /Users/jonah/CLionProjects/CommProtocol/buff_tester.c
  /Users/jonah/CLionProjects/CommProtocol/circ_buffer.h
+CMakeFiles/CommProtocol.dir/circ_buffer.c.o
+ /Users/jonah/CLionProjects/CommProtocol/circ_buffer.c
+ /Users/jonah/CLionProjects/CommProtocol/circ_buffer.h
