@@ -22,6 +22,7 @@ int main(int agrc, char** argv) {
             .cb = {
                     .head=0,
                     .tail=0,
+                    .id=-1
             },
 
     };
@@ -120,10 +121,12 @@ int run(Client *c) {
 
             else if(in[0] != '\0') {
                 sscanf(in, "%d", &temp);
-                printf("%s\n", in);
                 uint16_t u = (uint16_t)temp;
+                if (c->cb.id < 0)
+                    c->cb.id = u;
+                else
+                    insert(&c->cb, &u);
 
-                insert(&c->cb, &u);
                 disp_buff(&c->cb);
             }
 

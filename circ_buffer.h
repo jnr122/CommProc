@@ -24,13 +24,11 @@ typedef struct Packet {
     // frame[2] := SRC
     // frame[3] := DST
 
-
-
 } Packet;
 
 // buffer
 typedef struct Circ_Buffer {
-    int head, tail;
+    int head, tail, id;
     uint16_t frame[BUFFER_SIZE];
     Packet p;
 

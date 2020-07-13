@@ -32,7 +32,7 @@ int next_start(Circ_Buffer *cb) {
     }
     return FALSE;
 }
-
+//uint16_t crc16(uint8_t * pData, int length);
 /**
  * Use head and tail location to make a packet
  * @param cb the buffer
@@ -51,7 +51,12 @@ void make_packet(Circ_Buffer *cb) {
         calcPacketCRC(&CRC, (uint8_t *)&cb->p.frame[NUM_HEADER_VALS], (sizeof(cb->p.frame)-NUM_HEADER_VALS));
         printf("\n%u", CRC);
 
+
+//        uint16_t x = crc16((uint8_t *)&cb->p.frame[NUM_HEADER_VALS], (sizeof(cb->p.frame)-NUM_HEADER_VALS));
+//        printf("\n%u", x);
         disp_packet(&cb->p);
+
+        // check if packet is meant to be sent to this buffer here
     }
     // move the tail to the head after finishing packet
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE) {
@@ -63,6 +68,22 @@ void make_packet(Circ_Buffer *cb) {
 
 }
 
+
+//uint16_t crc16(uint8_t *pData, int length)
+//{
+//    uint8_t i;
+//    uint16_t wCrc = 0xffff;
+//    printf("\n");
+//    while (length--) {
+//        wCrc ^= *pData++ << 8;
+//        printf("%u", *pData);
+//        for (i=0; i < 8; i++)
+//            wCrc = wCrc & 0x8000 ? (wCrc << 1) ^ 0x1021 : wCrc << 1;
+//    }
+//
+//    return wCrc & 0xffff;
+//}
+
 /**
  * Do CRC check
  * @param CRC the seed
@@ -72,7 +93,7 @@ void make_packet(Circ_Buffer *cb) {
 void calcPacketCRC(uint16_t *CRC, uint8_t *object, uint16_t size) {
     for (int i = 0; i < size; ++i) {
         calcCRC(CRC, *(++object));
-        printf("%u ", *object);
+        printf("%u", *object);
     }
 }
 void calcCRC(uint16_t *CRC, uint8_t DataByte) {
