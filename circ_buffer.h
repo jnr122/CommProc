@@ -14,7 +14,6 @@
 #define FALSE 0
 #define SOP 0xAAAA
 
-
 // packet
 typedef struct Packet {
     int corrupt;
