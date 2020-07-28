@@ -120,12 +120,24 @@ int run(Client *c) {
             }
 
             else if(in[0] != '\0') {
+                c->cb.p.corrupt = TRUE;
                 sscanf(in, "%d", &temp);
                 uint16_t u = (uint16_t)temp;
                 if (c->cb.id < 0)
                     c->cb.id = u;
                 else
                     insert(&c->cb, &u);
+
+                // here you can check to see what the packet is, who its for
+                if (!c->cb.p.corrupt)
+                    if (c->cb.p.frame[3] == c->cb.id) {
+                        // this packet is for me! figure out what to do with it
+
+                        // if response flag is true, build appropriate packet
+
+                        // else decide what to do with the info
+                    }
+
 
                 disp_buff(&c->cb);
             }

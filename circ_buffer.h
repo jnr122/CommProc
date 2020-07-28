@@ -22,6 +22,7 @@ typedef struct Packet {
     // frame[1] := CRC
     // frame[2] := SRC
     // frame[3] := DST
+    // frame[4] := RSP
 
 } Packet;
 
@@ -45,6 +46,7 @@ void circulate(int *loc);
 void disp_buff(const Circ_Buffer *cb);
 int get_distance(int head, int tail);
 int next_start(Circ_Buffer *cb);
+
 
 
 #endif //COMMPROTOCOL_CIRC_BUFFER_H

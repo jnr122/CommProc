@@ -16,6 +16,8 @@ void insert(Circ_Buffer *cb, const uint16_t *c) {
     circulate(&cb->head);
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE)
         make_packet(cb);
+
+
 }
 
 /**
@@ -52,6 +54,11 @@ void make_packet(Circ_Buffer *cb) {
         printf("\n%u", CRC);
 
         disp_packet(&cb->p);
+        // valid packet
+        if (CRC == cb->p.frame[1])
+            cb->p.corrupt = FALSE;
+        else
+            cb->p.corrupt = TRUE;
         // check if packet is meant to be sent to this buffer here
     }
     // move the tail to the head after finishing packet
