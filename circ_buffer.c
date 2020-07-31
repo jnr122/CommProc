@@ -34,7 +34,7 @@ int next_start(Circ_Buffer *cb) {
     }
     return FALSE;
 }
-//uint16_t crc16(uint8_t * pData, int length);
+
 /**
  * Use head and tail location to make a packet
  * @param cb the buffer
@@ -55,11 +55,11 @@ void make_packet(Circ_Buffer *cb) {
 
         disp_packet(&cb->p);
         // valid packet
-        if (CRC == cb->p.frame[1])
-            cb->p.corrupt = FALSE;
-        else
-            cb->p.corrupt = TRUE;
-        // check if packet is meant to be sent to this buffer here
+
+        // after this client object can make sure
+        // packet isn't corrupt and check who it's for
+        cb->p.corrupt = (CRC != cb->p.frame[1]);
+
     }
     // move the tail to the head after finishing packet
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE) {
