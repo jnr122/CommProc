@@ -16,8 +16,6 @@ void insert(Circ_Buffer *cb, const uint16_t *c) {
     circulate(&cb->head);
     if (get_distance(cb->head, cb->tail) == FRAME_SIZE)
         make_packet(cb);
-
-
 }
 
 /**

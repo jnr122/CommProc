@@ -84,6 +84,10 @@ int run(Server *s) {
                 s->message = "i";
                 snprintf(temp, sizeof(temp), "%d",i);
                 s->message = temp;
+
+                // here build packet for first connection, for now just send ID to master
+                if (send(s->client_socket[0], s->message, strlen(s->message), 0) != strlen(s->message))
+                    perror("send");
                 break;
             }
         }
@@ -96,6 +100,8 @@ int run(Server *s) {
         // send new connection greeting message
         if (send(s->new_socket, s->message, strlen(s->message), 0) != strlen(s->message))
             perror("send");
+
+
 
         printf("\nWelcome message sent successfully.\n");
 
