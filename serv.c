@@ -128,6 +128,7 @@ int run(Server *s) {
                 s->buffer[s->valread] = '\0';
                 printf("%s", s->buffer);
 
+                // send message to all other clients
                 for (int j = 0; j < (sizeof(s->client_socket) / sizeof(s->client_socket[0])); ++j)
                     send(s->client_socket[j], s->buffer, strlen(s->buffer), 0);
             }

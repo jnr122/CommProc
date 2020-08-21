@@ -10,7 +10,7 @@
  * Add new input to buffer
  * @param cb the buffer
  * @param c the new character
- */
+*/
 void insert(Circ_Buffer *cb, const uint16_t *c) {
     cb->frame[cb->head] = *c;
     circulate(&cb->head);

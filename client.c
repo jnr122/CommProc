@@ -24,6 +24,7 @@ int main(int agrc, char** argv) {
                     .tail=0,
                     .id=-1
             },
+            .IVLOn = FALSE
 
     };
 
@@ -123,6 +124,7 @@ int run(Client *c) {
                 c->cb.p.corrupt = TRUE;
                 sscanf(in, "%d", &temp);
                 uint16_t u = (uint16_t)temp;
+                // this assigns first value as  ID from server, no need if hard ID
                 if (c->cb.id < 0)
                     c->cb.id = u;
                 else
@@ -130,6 +132,7 @@ int run(Client *c) {
 
                 // here you can check to see what the packet is, who its for
                 if (!c->cb.p.corrupt)
+                    // add conmdition for 'broadcast' flag
                     if (c->cb.p.frame[3] == c->cb.id) {
                         // this packet is for me! figure out what to do with it
 
@@ -145,16 +148,19 @@ int run(Client *c) {
 
         } //end if ready for read
 
-        // if stdin is ready to be read
-        if(FD_ISSET(STDIN_FILENO, &c->read_flags))
-            fgets(out, INPUT_SIZE, stdin);
+        // add condition for response flag hear to allow client to write
+        if (!c->IVLOn && c->cb.id != 0) {
+            // if stdin is ready to be read
+            if (FD_ISSET(STDIN_FILENO, &c->read_flags))
+                fgets(out, INPUT_SIZE, stdin);
 
-        // socket ready for writing
-        if(FD_ISSET(c->sock, &c->write_flags)) {
-            //printf("\nSocket ready for write");
-            FD_CLR(c->sock, &c->write_flags);
-            send(c->sock, out, INPUT_SIZE, 0);
-            memset(&out, 0, INPUT_SIZE);
+            // socket ready for writing
+            if (FD_ISSET(c->sock, &c->write_flags)) {
+                //printf("\nSocket ready for write");
+                FD_CLR(c->sock, &c->write_flags);
+                send(c->sock, out, INPUT_SIZE, 0);
+                memset(&out, 0, INPUT_SIZE);
+            }
         }
     }   //end while
 

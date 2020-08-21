@@ -14,7 +14,7 @@ typedef struct Client {
 
     fd_set read_flags, write_flags; // the flag sets to be used
     struct timeval waitd;          // the max wait time for an event
-    int sel;
+    int sel, IVLOn;
     uint16_t IDs[];
 
 } Client;
